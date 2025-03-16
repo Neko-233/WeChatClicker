@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">微信消息助手</string>
+    <string name="accessibility_service_label">微信消息助手</string>
+    <string name="accessibility_service_description">微信消息助手需要访问无障碍服务，以便自动点击和处理微信消息。</string>
+    <string name="start_service">开启无障碍服务</string>
+    <string name="service_running">无障碍服务已开启</string>
+    <string name="service_not_running">请开启WeChatClicker的无障碍服务</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    
+    <string name="title_settings">设置</string>
+    
+    <string name="pref_category_functional">功能设置</string>
+    <string name="pref_category_message_check">消息检查</string>
+    <string name="pref_category_auto_return">自动返回</string>
+    <string name="pref_category_advanced">高级设置</string>
+    <string name="pref_category_about">关于应用</string>
+    
+    <string name="pref_auto_click_title">自动点击新消息</string>
+    <string name="pref_auto_click_summary">自动打开微信中的未读聊天消息</string>
+    <string name="pref_auto_return_title">自动返回</string>
+    <string name="pref_auto_return_summary">查看消息后自动返回微信主界面</string>
+    
+    <string name="pref_check_interval_title">检查间隔</string>
+    <string name="pref_check_interval_summary">设置检查微信新消息的时间间隔（秒）</string>
+    <string name="pref_wifi_only_title">仅Wi-Fi下检查</string>
+    <string name="pref_wifi_only_summary">仅在连接Wi-Fi网络时检查新消息，节省移动数据流量</string>
+    <string name="pref_filter_mode_title">消息过滤模式</string>
+    <string name="pref_filter_mode_summary">设置需要自动处理的消息类型</string>
+    
+    <string name="pref_return_delay_title">返回延迟</string>
+    <string name="pref_return_delay_summary">设置查看消息后返回主界面的延迟时间（秒）</string>
+    
+    <string name="pref_keep_alive_title">保持服务活跃</string>
+    <string name="pref_keep_alive_summary">防止系统自动清理服务（可能增加电池消耗）</string>
+    <string name="pref_reset_stats_title">重置统计数据</string>
+    <string name="pref_reset_stats_summary">清除所有已处理消息的统计记录</string>
+    <string name="pref_view_logs_title">查看运行日志</string>
+    <string name="pref_view_logs_summary">查看应用运行日志，帮助诊断问题</string>
+    
+    <string name="pref_app_version_title">应用版本</string>
+    <string name="pref_privacy_policy_title">隐私政策</string>
+    <string name="pref_privacy_policy_summary">查看应用的隐私政策</string>
+    
+    <!-- 服务保活相关 -->
+    <string name="keep_alive_title">保持服务活跃</string>
+    <string name="keep_alive_description">启用此选项可在后台保持服务运行，确保打开微信时自动激活服务</string>
+    <string name="keep_alive_enabled">保持服务活跃功能已启用，将在微信启动时自动激活服务</string>
+    <string name="keep_alive_disabled">保持服务活跃功能已禁用</string>
+    <string name="service_running_notification">微信消息助手正在后台运行</string>
+    <string name="tap_to_open_app">点击打开应用</string>
+    <string name="enable_accessibility_service">请启用微信消息助手无障碍服务</string>
+    
+    <string-array name="pref_filter_mode_entries">
+        <item>所有消息</item>
+        <item>仅群聊消息</item>
+        <item>仅个人消息</item>
+        <item>仅重要联系人</item>
+    </string-array>
+    <string-array name="pref_filter_mode_values">
+        <item>all</item>
+        <item>group</item>
+        <item>private</item>
+        <item>important</item>
+    </string-array>
+    
+    <!-- 隐私政策文本 -->
+    <string name="privacy_policy_text">
+        <![CDATA[
+        <h1>隐私政策</h1>
+        <p>最后更新时间：2025年03月16日</p>
+        
+        <h2>简介</h2>
+        <p>欢迎使用微信消息助手（"本应用"）。保护您的隐私是我们的首要任务。本隐私政策旨在向您说明我们如何收集、使用和保护您的个人信息。</p>
+        
+        <h2>信息收集</h2>
+        <p>本应用收集的信息仅限于自动处理微信消息所必须的内容，具体包括：</p>
+        <ul>
+            <li>微信消息通知内容（仅在您启用辅助功能服务的情况下）</li>
+            <li>应用使用统计信息（如已处理消息数量和最后检查时间）</li>
+            <li>您在应用中的偏好设置</li>
+        </ul>
+        
+        <h2>信息使用</h2>
+        <p>我们收集的信息仅用于：</p>
+        <ul>
+            <li>提供自动点击和处理微信消息的功能</li>
+            <li>改进应用性能和用户体验</li>
+            <li>保存您的偏好设置</li>
+        </ul>
+        <p>我们不会将您的个人信息用于任何其他目的，也不会与任何第三方共享。</p>
+        
+        <h2>信息存储</h2>
+        <p>您的所有信息都存储在您的设备本地，使用Android的SharedPreferences机制。我们不会将您的任何数据上传到云端或服务器。</p>
+        
+        <h2>权限使用</h2>
+        <p>本应用需要以下权限：</p>
+        <ul>
+            <li>无障碍服务权限：用于检测和处理微信通知及自动点击操作</li>
+            <li>读取通知权限：用于读取微信新消息通知</li>
+        </ul>
+        
+        <h2>信息安全</h2>
+        <p>我们采取适当的技术和组织措施保护您的个人信息不被未经授权的访问或披露。</p>
+        
+        <h2>儿童隐私</h2>
+        <p>本应用不面向13岁以下儿童。我们不会故意收集儿童的个人信息。</p>
+        
+        <h2>隐私政策更新</h2>
+        <p>我们可能会不时更新本隐私政策。任何重大变更，我们都会通过应用内通知或其他适当方式通知您。</p>
+        
+        <h2>联系我们</h2>
+        <p>如果您对本隐私政策有任何疑问或建议，请通过应用反馈功能联系我们。</p>
+        ]]>
+    </string>
+</resources>

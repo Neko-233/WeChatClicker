@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#FF5252</color>
+    <color name="green">#69F0AE</color>
+    
+    <!-- 暗色主题颜色 -->
+    <color name="background_color">#121212</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="card_stroke">#333333</color>
+    <color name="text_primary">#E6FFFFFF</color>
+    <color name="text_secondary">#99FFFFFF</color>
+    <color name="icon_tint">#CCCCCC</color>
+    <color name="divider_color">#1FFFFFFF</color>
+</resources> 

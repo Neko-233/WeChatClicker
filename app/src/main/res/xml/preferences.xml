@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- 功能设置组 -->
+    <PreferenceCategory 
+        android:title="@string/pref_category_functional"
+        android:icon="@drawable/ic_settings_functional"
+        app:iconSpaceReserved="true">
+        
+        <SwitchPreferenceCompat
+            android:key="key_auto_click"
+            android:title="@string/pref_auto_click_title"
+            android:summary="@string/pref_auto_click_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="true" />
+            
+        <SwitchPreferenceCompat
+            android:key="key_auto_return"
+            android:title="@string/pref_auto_return_title"
+            android:summary="@string/pref_auto_return_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+    
+    <!-- 消息检查设置组 -->
+    <PreferenceCategory 
+        android:title="@string/pref_category_message_check"
+        android:icon="@drawable/ic_settings_message"
+        app:iconSpaceReserved="true">
+        
+        <SeekBarPreference
+            android:key="key_check_interval"
+            android:title="@string/pref_check_interval_title"
+            android:summary="@string/pref_check_interval_summary"
+            android:defaultValue="5"
+            android:max="30"
+            app:min="1"
+            app:showSeekBarValue="true"
+            app:adjustable="true"
+            app:iconSpaceReserved="true" />
+            
+        <SwitchPreferenceCompat
+            android:key="key_wifi_only"
+            android:title="@string/pref_wifi_only_title"
+            android:summary="@string/pref_wifi_only_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="true" />
+            
+        <ListPreference
+            android:key="key_filter_mode"
+            android:title="@string/pref_filter_mode_title"
+            android:summary="@string/pref_filter_mode_summary"
+            android:defaultValue="all"
+            android:entries="@array/pref_filter_mode_entries"
+            android:entryValues="@array/pref_filter_mode_values"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+    
+    <!-- 自动返回设置组 -->
+    <PreferenceCategory 
+        android:title="@string/pref_category_auto_return"
+        android:icon="@drawable/ic_settings_return"
+        app:iconSpaceReserved="true">
+        
+        <SeekBarPreference
+            android:key="key_return_delay"
+            android:title="@string/pref_return_delay_title"
+            android:summary="@string/pref_return_delay_summary"
+            android:defaultValue="3"
+            android:max="10"
+            app:min="1"
+            app:showSeekBarValue="true"
+            app:adjustable="true"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+    
+    <!-- 高级设置组 -->
+    <PreferenceCategory 
+        android:title="@string/pref_category_advanced"
+        android:icon="@drawable/ic_settings_advanced"
+        app:iconSpaceReserved="true">
+        
+        <SwitchPreferenceCompat
+            android:key="key_keep_alive"
+            android:title="@string/pref_keep_alive_title"
+            android:summary="@string/pref_keep_alive_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="true" />
+            
+        <Preference
+            android:key="key_reset_stats"
+            android:title="@string/pref_reset_stats_title"
+            android:summary="@string/pref_reset_stats_summary"
+            app:iconSpaceReserved="true" />
+            
+        <Preference
+            android:key="key_view_logs"
+            android:title="@string/pref_view_logs_title"
+            android:summary="@string/pref_view_logs_summary"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+    
+    <!-- 关于应用组 -->
+    <PreferenceCategory 
+        android:title="@string/pref_category_about"
+        android:icon="@drawable/ic_settings_info"
+        app:iconSpaceReserved="true">
+        
+        <Preference
+            android:key="key_app_version"
+            android:title="@string/pref_app_version_title"
+            android:selectable="false"
+            app:iconSpaceReserved="true" />
+            
+        <Preference
+            android:key="key_privacy_policy"
+            android:title="@string/pref_privacy_policy_title"
+            android:summary="@string/pref_privacy_policy_summary"
+            app:iconSpaceReserved="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen> 

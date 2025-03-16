@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.WeChatClicker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- 主要品牌颜色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#121212</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        
+        <!-- 状态栏和导航栏颜色 -->
+        <item name="android:statusBarColor">#121212</item>
+        <item name="android:navigationBarColor">@color/background_color</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- 文本颜色 -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        
+        <!-- Material组件样式 -->
+        <item name="materialCardViewStyle">@style/Widget.App.CardView.Dark</item>
+        <item name="materialButtonStyle">@style/Widget.App.Button.Dark</item>
+        <item name="switchStyle">@style/Widget.App.Switch.Dark</item>
+        
+        <!-- 首选项样式 -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Dark</item>
+    </style>
+    
+    <!-- 卡片样式 -->
+    <style name="Widget.App.CardView.Dark" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="strokeWidth">0.5dp</item>
+        <item name="strokeColor">@color/card_stroke</item>
+        <item name="rippleColor">@color/colorPrimary</item>
+    </style>
+    
+    <!-- 按钮样式 -->
+    <style name="Widget.App.Button.Dark" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">12dp</item>
+    </style>
+    
+    <!-- 开关样式 -->
+    <style name="Widget.App.Switch.Dark" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+    
+    <!-- 首选项样式 -->
+    <style name="PreferenceThemeOverlay.Dark" parent="PreferenceThemeOverlay">
+        <item name="android:background">@color/background_color</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+</resources> 
