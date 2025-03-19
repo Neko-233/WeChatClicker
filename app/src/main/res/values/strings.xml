@@ -15,6 +15,7 @@
     <string name="pref_category_auto_return">自动返回</string>
     <string name="pref_category_advanced">高级设置</string>
     <string name="pref_category_about">关于应用</string>
+    <string name="pref_category_language">语言设置</string>
     
     <string name="pref_auto_click_title">自动点击新消息</string>
     <string name="pref_auto_click_summary">自动打开微信中的未读聊天消息</string>
@@ -22,14 +23,14 @@
     <string name="pref_auto_return_summary">查看消息后自动返回微信主界面</string>
     
     <string name="pref_check_interval_title">检查间隔</string>
-    <string name="pref_check_interval_summary">设置检查微信新消息的时间间隔（秒）</string>
+    <string name="pref_check_interval_summary">设置检查微信新消息的时间间隔（毫秒，范围：100-10000）</string>
     <string name="pref_wifi_only_title">仅Wi-Fi下检查</string>
     <string name="pref_wifi_only_summary">仅在连接Wi-Fi网络时检查新消息，节省移动数据流量</string>
     <string name="pref_filter_mode_title">消息过滤模式</string>
     <string name="pref_filter_mode_summary">设置需要自动处理的消息类型</string>
     
     <string name="pref_return_delay_title">返回延迟</string>
-    <string name="pref_return_delay_summary">设置查看消息后返回主界面的延迟时间（秒）</string>
+    <string name="pref_return_delay_summary">设置查看消息后返回主界面的延迟时间（毫秒，范围：100-10000）</string>
     
     <string name="pref_keep_alive_title">保持服务活跃</string>
     <string name="pref_keep_alive_summary">防止系统自动清理服务（可能增加电池消耗）</string>
@@ -41,6 +42,14 @@
     <string name="pref_app_version_title">应用版本</string>
     <string name="pref_privacy_policy_title">隐私政策</string>
     <string name="pref_privacy_policy_summary">查看应用的隐私政策</string>
+    
+    <string name="pref_language_title">语言</string>
+    <string name="pref_language_summary">选择应用显示语言</string>
+    
+    <string name="pref_about">关于</string>
+    <string name="pref_version">版本信息</string>
+    <string name="pref_version_summary">当前版本</string>
+    <string name="pref_contact">联系我们</string>
     
     <!-- 服务保活相关 -->
     <string name="keep_alive_title">保持服务活跃</string>
@@ -64,53 +73,183 @@
         <item>important</item>
     </string-array>
     
-    <!-- 隐私政策文本 -->
-    <string name="privacy_policy_text">
+    <string-array name="pref_language_entries">
+        <item>跟随系统</item>
+        <item>简体中文</item>
+        <item>English</item>
+    </string-array>
+    
+    <string-array name="pref_language_values">
+        <item>system</item>
+        <item>zh</item>
+        <item>en</item>
+    </string-array>
+    
+    <!-- 隐私政策 -->
+    <string name="privacy_policy">隐私政策</string>
+    <string name="pref_privacy_policy">隐私政策</string>
+    <string name="privacy_policy_text">隐私政策\n\n
+1. 简介\n
+   微信消息助手（以下简称"我们"或"本应用"）重视用户的隐私和个人信息保护。本隐私政策说明我们如何收集、使用和保护您的信息。\n\n
+
+2. 信息收集\n
+   我们收集以下信息：\n
+   • 无障碍服务状态\n
+   • 应用设置和偏好\n
+   • 消息处理统计数据\n
+   • 服务运行状态\n\n
+
+3. 信息使用\n
+   收集的信息用于：\n
+   • 提供自动消息处理功能\n
+   • 维持服务稳定性\n
+   • 改善用户体验\n
+   • 保存您的偏好设置\n\n
+
+4. 数据存储与安全\n
+   • 所有数据仅存储在您的设备本地\n
+   • 我们不收集或传输任何个人信息\n
+   • 我们不与第三方共享任何数据\n\n
+
+5. 所需权限\n
+   本应用需要：\n
+   • 无障碍服务：用于处理微信消息\n
+   • 通知访问：用于显示服务状态通知\n\n
+
+6. 用户控制\n
+   您可以：\n
+   • 随时启用/禁用服务\n
+   • 通过卸载应用清除所有数据\n
+   • 通过设置控制所有功能\n\n
+
+7. 微信内容\n
+   • 我们不会读取、存储或传输您的微信消息\n
+   • 我们仅处理界面事件以实现自动化操作\n\n
+
+8. 更新\n
+   • 本隐私政策可能会不定期更新\n
+   • 重要变更将通过应用更新时通知\n\n
+
+9. 联系方式\n
+   如果您对本隐私政策有任何疑问，请通过应用内的反馈渠道与我们联系。\n\n
+
+10. 合规性\n
+    • 我们遵守相关隐私保护法规\n
+    • 我们尊重用户隐私和数据保护权利\n\n
+
+使用本应用即表示您同意本隐私政策。</string>
+    
+    <!-- 隐私政策界面 -->
+    <string name="title_privacy_policy">隐私政策</string>
+    <string name="privacy_policy_agree">同意</string>
+    <string name="privacy_policy_disagree">不同意</string>
+    
+    <!-- 主界面文本 -->
+    <string name="main_function_switch">主功能开关</string>
+    <string name="main_function_description">打开此开关启用微信消息自动处理功能</string>
+    <string name="enable_wechat_assistant">启用微信消息助手</string>
+    <string name="service_status_info">服务状态信息</string>
+    <string name="service_status_disabled">服务状态: 未启用</string>
+    <string name="last_check_none">最后检查: 无</string>
+    <string name="messages_processed">已处理消息: %1$d</string>
+    <string name="enable_accessibility">启用辅助功能服务</string>
+    <string name="function_settings">功能设置</string>
+    <string name="auto_click_title">自动点击新消息</string>
+    <string name="auto_click_description">自动打开未读聊天消息</string>
+    <string name="milliseconds">毫秒</string>
+    <string name="service_status_format">无障碍服务状态：%1$s</string>
+    <string name="service_status_running">已启动</string>
+    <string name="service_status_stopped">未启动</string>
+    <string name="last_check_time_format">上次检查时间：%1$s</string>
+    <string name="last_check_time_none">上次检查时间：尚未检查</string>
+    <string name="messages_processed_format">已处理消息数：%1$d</string>
+    <string name="service_not_running_status">上次检查时间：服务未启动</string>
+    
+    <!-- 隐私政策英文版 -->
+    <string name="privacy_policy_text_en">
         <![CDATA[
-        <h1>隐私政策</h1>
-        <p>最后更新时间：2025年03月16日</p>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: March 16, 2025</p>
         
-        <h2>简介</h2>
-        <p>欢迎使用微信消息助手（"本应用"）。保护您的隐私是我们的首要任务。本隐私政策旨在向您说明我们如何收集、使用和保护您的个人信息。</p>
+        <h2>Introduction</h2>
+        <p>Welcome to WeChat Message Assistant (\"the App\"). Protecting your privacy is our top priority. This privacy policy explains how we collect, use, and protect your personal information.</p>
         
-        <h2>信息收集</h2>
-        <p>本应用收集的信息仅限于自动处理微信消息所必须的内容，具体包括：</p>
+        <h2>Information Collection</h2>
+        <p>The App only collects information necessary for automatic WeChat message processing, including:</p>
         <ul>
-            <li>微信消息通知内容（仅在您启用辅助功能服务的情况下）</li>
-            <li>应用使用统计信息（如已处理消息数量和最后检查时间）</li>
-            <li>您在应用中的偏好设置</li>
+            <li>WeChat message notification content (only when accessibility service is enabled)</li>
+            <li>App usage statistics (such as number of messages processed and last check time)</li>
+            <li>Your preferences in the app</li>
         </ul>
         
-        <h2>信息使用</h2>
-        <p>我们收集的信息仅用于：</p>
+        <h2>Information Usage</h2>
+        <p>We collect information only for:</p>
         <ul>
-            <li>提供自动点击和处理微信消息的功能</li>
-            <li>改进应用性能和用户体验</li>
-            <li>保存您的偏好设置</li>
+            <li>Providing automatic click and message processing functionality</li>
+            <li>Improving app performance and user experience</li>
+            <li>Saving your preferences</li>
         </ul>
-        <p>我们不会将您的个人信息用于任何其他目的，也不会与任何第三方共享。</p>
+        <p>We do not use your personal information for any other purpose, nor do we share it with any third parties.</p>
         
-        <h2>信息存储</h2>
-        <p>您的所有信息都存储在您的设备本地，使用Android的SharedPreferences机制。我们不会将您的任何数据上传到云端或服务器。</p>
+        <h2>Information Storage</h2>
+        <p>All your information is stored locally on your device using Android\'s SharedPreferences mechanism. We do not upload any of your data to the cloud or servers.</p>
         
-        <h2>权限使用</h2>
-        <p>本应用需要以下权限：</p>
+        <h2>Permissions</h2>
+        <p>This app requires the following permissions:</p>
         <ul>
-            <li>无障碍服务权限：用于检测和处理微信通知及自动点击操作</li>
-            <li>读取通知权限：用于读取微信新消息通知</li>
+            <li>Accessibility Service: For detecting and processing WeChat notifications and automatic clicking</li>
+            <li>Notification Access: For reading new WeChat message notifications</li>
         </ul>
         
-        <h2>信息安全</h2>
-        <p>我们采取适当的技术和组织措施保护您的个人信息不被未经授权的访问或披露。</p>
+        <h2>Information Security</h2>
+        <p>We take appropriate technical and organizational measures to protect your personal information from unauthorized access or disclosure.</p>
         
-        <h2>儿童隐私</h2>
-        <p>本应用不面向13岁以下儿童。我们不会故意收集儿童的个人信息。</p>
+        <h2>Children\'s Privacy</h2>
+        <p>This app is not intended for children under 13. We do not knowingly collect personal information from children.</p>
         
-        <h2>隐私政策更新</h2>
-        <p>我们可能会不时更新本隐私政策。任何重大变更，我们都会通过应用内通知或其他适当方式通知您。</p>
+        <h2>Privacy Policy Updates</h2>
+        <p>We may update this privacy policy from time to time. Any significant changes will be notified to you through in-app notifications or other appropriate means.</p>
         
-        <h2>联系我们</h2>
-        <p>如果您对本隐私政策有任何疑问或建议，请通过应用反馈功能联系我们。</p>
+        <h2>Contact Us</h2>
+        <p>If you have any questions or suggestions about this privacy policy, please contact us through the app\'s feedback feature.</p>
         ]]>
     </string>
+    
+    <!-- Toast消息 -->
+    <string name="toast_service_enabled">WeChat Message Assistant has been enabled</string>
+    <string name="toast_service_disabled">WeChat Message Assistant has been disabled</string>
+    <string name="toast_auto_click_enabled">Auto click feature has been enabled</string>
+    <string name="toast_auto_click_disabled">Auto click feature has been disabled</string>
+    <string name="toast_auto_return_enabled">Auto return feature has been enabled</string>
+    <string name="toast_auto_return_disabled">Auto return feature has been disabled</string>
+    <string name="toast_keep_alive_enabled">Keep service active feature has been enabled, service will be automatically activated when WeChat starts</string>
+    <string name="toast_keep_alive_disabled">Keep service active feature has been disabled</string>
+    <string name="toast_open_accessibility_settings">Please find and enable \"WeChat Message Assistant\" in accessibility services</string>
+    <string name="toast_cannot_open_accessibility_settings">Cannot open accessibility settings, please go to system settings manually</string>
+    <string name="toast_input_number_range">请输入100-10000之间的数字</string>
+    
+    <!-- 通知相关 -->
+    <string name="notification_enable_service">请启用微信消息助手无障碍服务</string>
+    <string name="notification_channel_name">微信消息助手服务</string>
+    <string name="notification_channel_description">显示微信消息助手服务的状态</string>
+    
+    <!-- 服务状态相关 -->
+    <string name="toast_service_activated">微信自动点击服务已激活</string>
+    <string name="toast_service_started">微信消息助手已启动</string>
+    <string name="toast_service_stopped">微信消息助手已停止</string>
+    
+    <string name="action_settings">设置</string>
+    
+    <string name="about_title">关于</string>
+    <string name="version_format">版本 %1$s</string>
+    <string name="unknown_version">未知版本</string>
+    <string name="app_description">一款帮助自动检查并点击微信新消息的辅助工具</string>
+    <string name="developers">开发者</string>
+    <string name="developer_names">Claude &amp; Miku</string>
+    <string name="contact_info">联系方式</string>
+    <string name="contact_email">shigure3@outlook.com</string>
+    <string name="copyright_info">© 2025 Miku使用Claude开发. 保留所有权利。</string>
+    <string name="feature_not_implemented">此功能暂未实现</string>
+    <string name="stats_reset">统计数据已重置</string>
+    <string name="no_email_app">找不到邮件应用</string>
 </resources>

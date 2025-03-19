@@ -27,7 +27,7 @@ import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeChatAccessibilityService : AccessibilityService() {
+class WeChatAccessibilityService : AccessibilityService(), AppConfig.ConfigChangeListener {
     companion object {
         private const val TAG = "WeChatAccessibility"
         private const val PROCESS_DELAY = 300L
@@ -70,7 +70,7 @@ class WeChatAccessibilityService : AccessibilityService() {
             val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(context.getString(R.string.app_name))
-                .setContentText("请启用微信消息助手无障碍服务")
+                .setContentText(context.getString(R.string.notification_enable_service))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
@@ -89,8 +89,8 @@ class WeChatAccessibilityService : AccessibilityService() {
         // 创建通知渠道
         private fun createNotificationChannel(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val name = "微信消息助手服务"
-                val descriptionText = "显示微信消息助手服务的状态"
+                val name = context.getString(R.string.notification_channel_name)
+                val descriptionText = context.getString(R.string.notification_channel_description)
                 val importance = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance).apply {
                     description = descriptionText
@@ -107,10 +107,12 @@ class WeChatAccessibilityService : AccessibilityService() {
     private val serviceScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var isProcessing = false
     private var lastEventTime = 0L
+    private var lastCheckTime = 0L // 添加上一次真正检查未读消息的时间
     private var checkJob: Job? = null
     private var forceReturnJob: Job? = null
     private var isInWeChatApp = false
     private var watchdogReceiver: BroadcastReceiver? = null
+    private var serviceClickedChat = false
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
         // 检查主功能开关是否启用
@@ -153,6 +155,12 @@ class WeChatAccessibilityService : AccessibilityService() {
         }
         lastEventTime = currentTime
 
+        // 检查距上次检查时间是否满足检查间隔
+        if (currentTime - lastCheckTime < appConfig.checkInterval) {
+            Log.d(TAG, "距离上次检查未满设定间隔(${appConfig.checkInterval}ms)，跳过")
+            return
+        }
+
         // 如果正在处理其他事件，跳过
         if (isProcessing) {
             Log.d(TAG, "正在处理其他事件，跳过")
@@ -163,6 +171,8 @@ class WeChatAccessibilityService : AccessibilityService() {
             try {
                 isProcessing = true
                 processEvent(event)
+                // 更新上次检查时间
+                lastCheckTime = System.currentTimeMillis()
             } catch (e: Exception) {
                 Log.e(TAG, "处理事件时出错", e)
             } finally {
@@ -196,12 +206,13 @@ class WeChatAccessibilityService : AccessibilityService() {
             if (isChatUI(currentActivity, rootNode)) {
                 Log.d(TAG, "检测到聊天界面")
                 
-                // 如果启用了自动返回功能，则返回主界面
-                if (appConfig.autoReturnEnabled) {
-                    Log.d(TAG, "启用了自动返回，准备返回主界面")
+                // 如果启用了自动返回功能，且是服务点击的聊天，则返回主界面
+                if (appConfig.autoReturnEnabled && serviceClickedChat) {
+                    Log.d(TAG, "启用了自动返回，并且是服务点击的聊天，准备返回主界面")
                     delay(appConfig.returnDelay)
                     performGlobalAction(GLOBAL_ACTION_BACK)
                     lastReturnTime = System.currentTimeMillis()
+                    serviceClickedChat = false
                 }
                 delay(PROCESS_DELAY)
                 return
@@ -216,6 +227,8 @@ class WeChatAccessibilityService : AccessibilityService() {
                     val unreadItem = findUnreadMessageItem(rootNode)
                     if (unreadItem != null) {
                         Log.d(TAG, "找到未读消息，准备点击")
+                        // 标记为服务点击的聊天
+                        serviceClickedChat = true
                         unreadItem.performAction(AccessibilityNodeInfo.ACTION_CLICK)
                         
                         // 增加处理消息计数
@@ -230,12 +243,13 @@ class WeChatAccessibilityService : AccessibilityService() {
                 Log.d(TAG, "不在主界面，当前在微信内部")
                 
                 // 如果启用了自动返回功能，且距离上次返回操作已经超过设定的时间，则尝试返回
-                if (appConfig.autoReturnEnabled) {
+                if (appConfig.autoReturnEnabled && serviceClickedChat) {
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastReturnTime > appConfig.returnDelay) {
                         Log.d(TAG, "尝试返回主界面")
                         performGlobalAction(GLOBAL_ACTION_BACK)
                         lastReturnTime = currentTime
+                        serviceClickedChat = false
                     }
                 }
             }
@@ -368,6 +382,12 @@ class WeChatAccessibilityService : AccessibilityService() {
         // 确保服务标志为启用状态
         isInWeChatApp = true
         
+        // 重置服务点击标志
+        serviceClickedChat = false
+        
+        // 重置上次检查时间
+        lastCheckTime = 0L
+        
         // 更新静态变量以便UI显示
         isServiceEnabled = true
         
@@ -378,7 +398,7 @@ class WeChatAccessibilityService : AccessibilityService() {
         registerWatchdog()
         
         // 显示一个提示
-        Toast.makeText(this, "微信自动点击服务已激活", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.toast_service_activated), Toast.LENGTH_SHORT).show()
     }
 
     override fun onServiceConnected() {
@@ -391,6 +411,8 @@ class WeChatAccessibilityService : AccessibilityService() {
         
         // 初始化配置
         appConfig = AppConfig(this)
+        // 注册配置变更监听器
+        appConfig.addChangeListener(this)
         
         // 设置服务配置
         serviceInfo?.apply {
@@ -419,7 +441,7 @@ class WeChatAccessibilityService : AccessibilityService() {
         // 重置并启动服务
         resetAndStartService()
         
-        Toast.makeText(this, "微信消息助手已启动", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.toast_service_started), Toast.LENGTH_SHORT).show()
     }
     
     // 启动定期检查任务
@@ -444,6 +466,15 @@ class WeChatAccessibilityService : AccessibilityService() {
                     // 如果正在处理事件，跳过
                     if (isProcessing) {
                         delay(appConfig.checkInterval)
+                        continue
+                    }
+                    
+                    // 检查距上次检查时间是否满足间隔要求
+                    val currentTime = System.currentTimeMillis()
+                    if (currentTime - lastCheckTime < appConfig.checkInterval) {
+                        val remainingTime = appConfig.checkInterval - (currentTime - lastCheckTime)
+                        Log.d(TAG, "距离上次检查未满设定间隔，还需等待${remainingTime}ms")
+                        delay(remainingTime)
                         continue
                     }
                     
@@ -476,15 +507,20 @@ class WeChatAccessibilityService : AccessibilityService() {
                                 appConfig.updateLastCheckTime()
                                 // 同时更新静态变量以便UI显示
                                 lastCheckedTime = appConfig.lastCheckTime
+                                // 更新本地检查时间变量
+                                lastCheckTime = System.currentTimeMillis()
                                 
-                                if (!isMainUI(rootNode) && appConfig.autoReturnEnabled) {
+                                if (!isMainUI(rootNode) && appConfig.autoReturnEnabled && serviceClickedChat) {
                                     Log.d(TAG, "定期检查: 不在主界面，尝试返回")
                                     performGlobalAction(GLOBAL_ACTION_BACK)
                                     lastReturnTime = System.currentTimeMillis()
+                                    serviceClickedChat = false
                                 } else if (appConfig.autoClickEnabled) {
                                     val unreadItem = findUnreadMessageItem(rootNode)
                                     if (unreadItem != null) {
                                         Log.d(TAG, "定期检查: 找到未读消息，准备点击")
+                                        // 标记为服务点击的聊天
+                                        serviceClickedChat = true
                                         unreadItem.performAction(AccessibilityNodeInfo.ACTION_CLICK)
                                         
                                         // 增加处理消息计数
@@ -502,10 +538,13 @@ class WeChatAccessibilityService : AccessibilityService() {
                         isInWeChatApp = false
                         Log.d(TAG, "当前不在微信应用内，跳过检查")
                     }
+                    
+                    // 等待指定的检查间隔时间
+                    delay(appConfig.checkInterval)
                 } catch (e: Exception) {
                     Log.e(TAG, "定期检查出错", e)
+                    delay(appConfig.checkInterval) // 出错也要等待间隔时间
                 }
-                delay(appConfig.checkInterval)
             }
         }
     }
@@ -687,6 +726,9 @@ class WeChatAccessibilityService : AccessibilityService() {
         super.onDestroy()
         Log.d(TAG, "WeChatAccessibilityService已销毁")
         
+        // 移除配置变更监听器
+        appConfig.removeChangeListener(this)
+        
         // 取消所有任务
         serviceScope.cancel()
         
@@ -698,7 +740,7 @@ class WeChatAccessibilityService : AccessibilityService() {
         isServiceEnabled = false
         isRunning = false
         
-        Toast.makeText(this, "微信消息助手已停止", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.toast_service_stopped), Toast.LENGTH_SHORT).show()
     }
     
     private fun cancelAllJobs() {
@@ -776,5 +818,44 @@ class WeChatAccessibilityService : AccessibilityService() {
         }
         
         Log.d(TAG, "Watchdog检查已调度，将在 ${WATCHDOG_INTERVAL / 1000} 秒后触发")
+    }
+
+    // 实现AppConfig.ConfigChangeListener接口的方法
+    override fun onConfigChanged(key: String, value: Any) {
+        Log.d(TAG, "配置已更改: $key = $value")
+        
+        when (key) {
+            "check_interval" -> {
+                // 检查间隔变更，重新启动检查任务
+                Log.d(TAG, "检查间隔已更改为: ${value}ms，重新启动检查任务")
+                startCheckJob()
+            }
+            "return_delay" -> {
+                Log.d(TAG, "返回延迟已更改为: ${value}ms")
+                // 无需特殊处理，下次使用时会直接读取新值
+            }
+            "main_service_enabled" -> {
+                val enabled = value as Boolean
+                if (!enabled) {
+                    // 如果禁用了服务，取消所有任务
+                    cancelAllJobs()
+                } else {
+                    // 如果启用了服务，重新启动任务
+                    startCheckJob()
+                    registerWatchdog()
+                }
+            }
+            "auto_click_enabled", "auto_return_enabled" -> {
+                // 这些设置的变更会直接影响下一次处理，无需特殊处理
+            }
+            "keep_alive" -> {
+                // 保持活跃设置变更
+                if (value as Boolean) {
+                    registerWatchdog()
+                } else {
+                    unregisterWatchdog()
+                }
+            }
+        }
     }
 } 

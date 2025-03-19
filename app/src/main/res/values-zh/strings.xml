@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toast消息 -->
+    <string name="toast_service_enabled">微信消息助手已启用</string>
+    <string name="toast_service_disabled">微信消息助手已禁用</string>
+    <string name="toast_auto_click_enabled">自动点击功能已启用</string>
+    <string name="toast_auto_click_disabled">自动点击功能已禁用</string>
+    <string name="toast_auto_return_enabled">自动返回功能已启用</string>
+    <string name="toast_auto_return_disabled">自动返回功能已禁用</string>
+    <string name="toast_keep_alive_enabled">保持服务活跃功能已启用，将在微信启动时自动激活服务</string>
+    <string name="toast_keep_alive_disabled">保持服务活跃功能已禁用</string>
+    <string name="toast_open_accessibility_settings">请在无障碍服务中找到并启用"微信消息助手"</string>
+    <string name="toast_cannot_open_accessibility_settings">无法打开无障碍设置，请手动前往系统设置</string>
+    <string name="toast_input_number_range">请输入100-10000之间的数字</string>
+    
+    <!-- 通知相关 -->
+    <string name="notification_enable_service">请启用微信消息助手无障碍服务</string>
+    <string name="notification_channel_name">微信消息助手服务</string>
+    <string name="notification_channel_description">显示微信消息助手服务的状态</string>
+    
+    <!-- 服务状态相关 -->
+    <string name="toast_service_activated">微信自动点击服务已激活</string>
+    <string name="toast_service_started">微信消息助手已启动</string>
+    <string name="toast_service_stopped">微信消息助手已停止</string>
+</resources> 

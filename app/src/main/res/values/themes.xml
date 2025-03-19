@@ -36,6 +36,7 @@
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/colorPrimary</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
         <item name="cornerRadius">8dp</item>
         <item name="android:padding">12dp</item>
     </style>
@@ -43,5 +44,8 @@
     <!-- 开关样式 -->
     <style name="Widget.App.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorSwitchThumbNormal">@color/switch_thumb_color</item>
+        <item name="thumbTint">@color/switch_thumb_color</item>
+        <item name="trackTint">@color/switch_track_color</item>
     </style>
 </resources>

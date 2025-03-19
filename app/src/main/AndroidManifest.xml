@@ -53,7 +53,7 @@
         <activity
             android:name=".PrivacyPolicyActivity"
             android:exported="false"
-            android:label="隐私政策"
+            android:label="@string/title_privacy_policy"
             android:parentActivityName=".SettingsActivity"
             android:theme="@style/Theme.WeChatClicker">
             <meta-data
@@ -62,9 +62,20 @@
         </activity>
         
         <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:label="@string/about_title"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.WeChatClicker">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        
+        <activity
             android:name=".LogViewerActivity"
             android:exported="false"
-            android:label="运行日志"
+            android:label="@string/pref_view_logs_title"
             android:parentActivityName=".SettingsActivity"
             android:theme="@style/Theme.WeChatClicker">
             <meta-data

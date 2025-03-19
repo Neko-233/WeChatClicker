@@ -1,359 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="微信消息助手"
-            app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
-            <!-- 主功能开关卡片 -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mainFunctionCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="0.5dp">
+                app:rippleColor="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mainFunctionTitle"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
+                        android:text="@string/main_function_switch"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:src="@android:drawable/ic_menu_manage"
-                            app:tint="@color/colorPrimary"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="主功能开关"
-                            android:textStyle="bold"
-                            android:textSize="22sp"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"
-                            android:layout_gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mainFunctionDescription"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="打开此开关启用微信消息自动处理功能"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/main_function_description"
                         android:textSize="16sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="16dp"/>
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toStartOf="@+id/mainSwitch"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mainFunctionTitle" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/mainServiceSwitch"
-                        android:layout_width="match_parent"
+                        android:id="@+id/mainSwitch"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="启用微信消息助手"
-                        android:textSize="18sp"
-                        android:textColor="@color/text_primary"/>
-                </LinearLayout>
+                        app:thumbTint="@color/switch_thumb_color"
+                        app:trackTint="@color/switch_track_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 状态卡片 -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/serviceStatusCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="0.5dp">
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:rippleColor="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainFunctionCard">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/serviceStatusTitle"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
+                        android:text="@string/service_status_info"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:src="@android:drawable/ic_menu_info_details"
-                            app:tint="@color/green"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="服务状态信息"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"
-                            android:layout_gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/serviceStatusText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="服务状态: 未启用"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/service_status_disabled"
                         android:textSize="16sp"
-                        android:textColor="@color/red"
-                        android:layout_marginBottom="12dp"
-                        android:drawablePadding="8dp"/>
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/serviceStatusTitle" />
 
-                    <TextView
-                        android:id="@+id/lastCheckedText"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/lastCheckText"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="最后检查: 无"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/last_check_none"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp"
-                        android:drawablePadding="8dp"/>
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/serviceStatusText" />
 
-                    <TextView
-                        android:id="@+id/messagesProcessedText"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/messageCountText"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="已处理消息: 0"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/messages_processed"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="16dp"
-                        android:drawablePadding="8dp"/>
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lastCheckText" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/enableServiceButton"
+                        android:id="@+id/accessibilityBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="启用辅助功能服务"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/enable_accessibility"
                         android:textSize="16sp"
-                        android:padding="12dp"
-                        app:cornerRadius="8dp"
-                        app:icon="@android:drawable/ic_menu_manage"
-                        app:iconGravity="textStart"
-                        app:iconPadding="8dp"/>
-                </LinearLayout>
+                        android:textAllCaps="false"
+                        app:cornerRadius="12dp"
+                        app:elevation="4dp"
+                        app:rippleColor="@color/colorAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/messageCountText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 设置卡片 -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/functionSettingsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="0.5dp">
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:rippleColor="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/serviceStatusCard">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/functionSettingsTitle"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
-
-                        <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:src="@android:drawable/ic_menu_preferences"
-                            app:tint="@color/blue"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="功能设置"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"
-                            android:layout_gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <!-- 自动点击新消息 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="自动点击新消息"
-                                android:textSize="16sp"
-                                android:textColor="@color/text_primary"
-                                android:textStyle="bold"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="自动打开未读聊天消息"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:layout_marginTop="2dp"/>
-                        </LinearLayout>
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/autoClickSwitch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"/>
-                    </LinearLayout>
-
-                    <!-- 自动返回 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="自动返回"
-                                android:textSize="16sp"
-                                android:textColor="@color/text_primary"
-                                android:textStyle="bold"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="查看消息后自动返回微信主界面"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_secondary"
-                                android:layout_marginTop="2dp"/>
-                        </LinearLayout>
-
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/autoReturnSwitch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- 服务保活卡片 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/keepAliveCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="0.5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
-
-                        <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:src="@android:drawable/ic_lock_power_off"
-                            app:tint="@color/colorAccent"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="保持服务活跃"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"
-                            android:layout_gravity="center_vertical"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="启用此选项可在后台保持服务运行，确保打开微信时自动激活服务"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="16dp"/>
+                        android:text="@string/function_settings"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/keepAliveSwitch"
+                        android:id="@+id/autoClickSwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="保持服务活跃"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/auto_click_title"
                         android:textSize="16sp"
-                        android:textColor="@color/text_primary"/>
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:thumbTint="@color/switch_thumb_color"
+                        app:trackTint="@color/switch_track_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/functionSettingsTitle" />
 
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/autoReturnSwitch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/pref_auto_return_title"
+                        android:textSize="16sp"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:thumbTint="@color/switch_thumb_color"
+                        app:trackTint="@color/switch_track_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/autoClickSwitch" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settingsBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/title_settings"
+                        android:textSize="16sp"
+                        android:textAllCaps="false"
+                        app:cornerRadius="12dp"
+                        app:elevation="4dp"
+                        app:rippleColor="@color/colorAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/autoReturnSwitch" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/aboutCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:rippleColor="@color/colorAccent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/functionSettingsCard"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/about_title"
+                        android:textSize="18sp"
+                        android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/aboutBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_title"
+                        android:textAllCaps="false"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_arrow_forward"
+                        app:iconGravity="end"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout> 

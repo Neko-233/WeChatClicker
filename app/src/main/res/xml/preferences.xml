@@ -30,15 +30,13 @@
         android:icon="@drawable/ic_settings_message"
         app:iconSpaceReserved="true">
         
-        <SeekBarPreference
+        <EditTextPreference
             android:key="key_check_interval"
             android:title="@string/pref_check_interval_title"
             android:summary="@string/pref_check_interval_summary"
-            android:defaultValue="5"
-            android:max="30"
-            app:min="1"
-            app:showSeekBarValue="true"
-            app:adjustable="true"
+            android:defaultValue="1000"
+            android:inputType="number"
+            android:persistent="false"
             app:iconSpaceReserved="true" />
             
         <SwitchPreferenceCompat
@@ -46,16 +44,6 @@
             android:title="@string/pref_wifi_only_title"
             android:summary="@string/pref_wifi_only_summary"
             android:defaultValue="false"
-            app:iconSpaceReserved="true" />
-            
-        <ListPreference
-            android:key="key_filter_mode"
-            android:title="@string/pref_filter_mode_title"
-            android:summary="@string/pref_filter_mode_summary"
-            android:defaultValue="all"
-            android:entries="@array/pref_filter_mode_entries"
-            android:entryValues="@array/pref_filter_mode_values"
-            app:useSimpleSummaryProvider="true"
             app:iconSpaceReserved="true" />
     </PreferenceCategory>
     
@@ -65,15 +53,13 @@
         android:icon="@drawable/ic_settings_return"
         app:iconSpaceReserved="true">
         
-        <SeekBarPreference
+        <EditTextPreference
             android:key="key_return_delay"
             android:title="@string/pref_return_delay_title"
             android:summary="@string/pref_return_delay_summary"
-            android:defaultValue="3"
-            android:max="10"
-            app:min="1"
-            app:showSeekBarValue="true"
-            app:adjustable="true"
+            android:defaultValue="2000"
+            android:inputType="number"
+            android:persistent="false"
             app:iconSpaceReserved="true" />
     </PreferenceCategory>
     
@@ -103,6 +89,23 @@
             app:iconSpaceReserved="true" />
     </PreferenceCategory>
     
+    <!-- 语言设置组 -->
+    <PreferenceCategory
+        android:title="@string/pref_category_language"
+        android:icon="@drawable/ic_settings_language"
+        app:iconSpaceReserved="true">
+
+        <ListPreference
+            android:defaultValue="system"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_values"
+            android:key="language"
+            android:title="@string/pref_language_title"
+            android:summary="@string/pref_language_summary"
+            app:iconSpaceReserved="true" />
+
+    </PreferenceCategory>
+    
     <!-- 关于应用组 -->
     <PreferenceCategory 
         android:title="@string/pref_category_about"
@@ -110,15 +113,8 @@
         app:iconSpaceReserved="true">
         
         <Preference
-            android:key="key_app_version"
-            android:title="@string/pref_app_version_title"
-            android:selectable="false"
-            app:iconSpaceReserved="true" />
-            
-        <Preference
-            android:key="key_privacy_policy"
-            android:title="@string/pref_privacy_policy_title"
-            android:summary="@string/pref_privacy_policy_summary"
+            android:key="key_about"
+            android:title="@string/about_title"
             app:iconSpaceReserved="true" />
     </PreferenceCategory>
 
